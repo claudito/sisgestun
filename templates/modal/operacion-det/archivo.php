@@ -1,4 +1,13 @@
-<form enctype="multipart/form-data"   action="<?php echo URL; ?>/controlador/operacion-det/archivo.php" method="POST"
+<script>
+function validar(f){
+f.enviar.value="Por favor, espere un momento el archivo esta siendo cargado.";
+f.enviar.disabled=true;
+f.usuario.value=(f.usuario.value=="")?"Anónimo":f. usuario.value;
+return true}
+</script>
+
+
+<form enctype="multipart/form-data"   action="<?php echo URL; ?>/controlador/operacion-det/archivo.php" method="POST"  onsubmit="return validar(this)"
 	   >
 
 <div class="modal fade" id="modal-archivo">
@@ -19,8 +28,9 @@
 
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-<button type="submit" id="enviar" class="btn btn-success">Subir</button>
+
+<input type='submit' name='enviar'  value="Subir" class="btn btn-success" />
+
 </div>
 </div>
 </div>

@@ -14,6 +14,8 @@ Assets::modal('operacion-det/eliminar-evento');
 #id
 $id  =  $_GET['id'];
 
+$_SESSION['id_operacion'] = $id;
+
 ?>
 <style>
 table{

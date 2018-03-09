@@ -79,7 +79,7 @@
 
 <div class="form-group">
 <label>Operador 2</label>
-<select name="operador2"  class="form-control"  required="">
+<select name="operador2"  class="form-control">
 <option value="">[Seleccionar]</option>
 <?php foreach (Personal::lista_cargo('CODCAR003') as $key => $value): ?>
 <option value="<?php echo $value['codigo']; ?>"><?php echo $value['nombres'].' '.$value['apepat'].' '.$value['apemat']; ?></option>
@@ -89,7 +89,7 @@
 
 <div class="form-group">
 <label>TI</label>
-<select name="ti"  class="form-control"  required="">
+<select name="ti"  class="form-control">
 <option value="">[Seleccionar]</option>
 <?php foreach (Personal::lista_cargo('CODCAR004') as $key => $value): ?>
 <option value="<?php echo $value['codigo']; ?>"><?php echo $value['nombres'].' '.$value['apepat'].' '.$value['apemat']; ?></option>

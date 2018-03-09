@@ -26,79 +26,53 @@ $movil           =   (empty($_POST['movil']))       ? '0'  : $_POST['movil'] ;
 
 
 //si existen incidentes en la fecha correspondientes
-$existe =  count(Operacion_validacion::consulta($fecha));
+$existe =  count(Operacion_validacion::consulta($fecha,'turno_codigo'));
 
-if ($existe>0)
-{
+//turno mañana
+$turno_01 = count(Operacion_validacion::turno($fecha,'CODTUR001'));
 
-//turno 02
+//turno tarde
 $turno_02 = count(Operacion_validacion::turno($fecha,'CODTUR002'));
 
+//turno noche
+$turno_03 = count(Operacion_validacion::turno($fecha,'CODTUR003'));
 
-if($turno=='CODTUR003')
+
+if ($existe==0) 
 {
-
-if ($turno_02==0)
+	
+if ($turno=='CODTUR001')
 {
+ 
+ //registro turno mañana
+$objeto  =  new Operacion($codigo,$fecha,$sentido,$turno,$incidente,$coordinador,$operador1,$operador2,$ti,$epi,$seguridad,$movil);
 
-Message::sweetalert("Notificación","warning","Solo se permite registro del turno tarde",3);
+$data  =  $objeto->agregar();
 
+if($data=='ok')
+{
+Correlativo::actualizar('REGINC');
+Message::sweetalert("Buen Trabajo","success","Registro Agregado",2);
+}
+else
+{
+Message::sweetalert("Error","error","Consulte al área de Soporte",2);
+}	
+
+
+
+}
+else
+{
+  Message::sweetalert("Error de Registro","warning","Solo se permite registro del  turno Mañana.",3);
+}
 
 } 
 else 
 {
-
-
- //registro turno mañana
-$objeto  =  new Operacion($codigo,$fecha,$sentido,$turno,$incidente,$coordinador,$operador1,$operador2,$ti,$epi,$seguridad,$movil);
-
-$data  =  $objeto->agregar();
-
-if($data=='ok')
-{
-Correlativo::actualizar('REGINC');
-Message::sweetalert("Buen Trabajo","success","Registro Agregado",2);
-}
-else
-{
-Message::sweetalert("Error","error","Consulte al área de Soporte",2);
-}	
-
-
-
-
-
-}
-
-}
-else
-{
 	
-
- //registro turno mañana
-$objeto  =  new Operacion($codigo,$fecha,$sentido,$turno,$incidente,$coordinador,$operador1,$operador2,$ti,$epi,$seguridad,$movil);
-
-$data  =  $objeto->agregar();
-
-if($data=='ok')
-{
-Correlativo::actualizar('REGINC');
-Message::sweetalert("Buen Trabajo","success","Registro Agregado",2);
-}
-else
-{
-Message::sweetalert("Error","error","Consulte al área de Soporte",2);
-}	
-
-
-}
-
-
-}
-else
-{
-
-if ($turno=='CODTUR001') 
+//turno tarde
+if($turno_01>0)
 {
 
  //registro turno mañana
@@ -117,29 +91,43 @@ Message::sweetalert("Error","error","Consulte al área de Soporte",2);
 }	
 
 
+}
+else
+{
+	echo "no hay mañana";
+}
+
+//turno noche
+if($turno_02>0)
+{
+
+ //registro turno mañana
+$objeto  =  new Operacion($codigo,$fecha,$sentido,$turno,$incidente,$coordinador,$operador1,$operador2,$ti,$epi,$seguridad,$movil);
+
+$data  =  $objeto->agregar();
+
+if($data=='ok')
+{
+Correlativo::actualizar('REGINC');
+Message::sweetalert("Buen Trabajo","success","Registro Agregado",2);
+}
+else
+{
+Message::sweetalert("Error","error","Consulte al área de Soporte",2);
+}	
 
 
 }
 else
 {
-
-
-Message::sweetalert("Notificación","warning","Solo se permite registro del turno mañana",3);
-
-
+	echo "no hay tarde";
 }
 
 
 
 
 
-
-
-
 }
-
-
-
 
 
 

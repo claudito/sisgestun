@@ -9,10 +9,15 @@ $date      =  date('d-m-Y-H-i-s');
 $filename  =  $file['tmp_name'];
 $size      =  $file['size'];
 
-$ruta        =  $date."-".$operacion."-".$file['name'];
+//extensión archivo
+$extension   =  pathinfo($file['name'],PATHINFO_EXTENSION);
+//encriptación archivo
+$ruta        =  $_SESSION[KEY.CODIGO].$date."-".$operacion."-".$file['name'];
+$ruta        =  md5($ruta);
+//agregar extensión
+$ruta        =  $ruta.".".$extension;
 $destination =  "../../uploads/".$ruta;
 
-$extension   =  pathinfo($file['name'],PATHINFO_EXTENSION);
 
 if (move_uploaded_file($filename, $destination))
 {

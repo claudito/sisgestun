@@ -2,10 +2,10 @@
 #Options -Indexes
 
 #set max upload file size
-php_value upload_max_filesize 25M
-php_value post_max_size 25M
-php_value max_execution_time 300
-php_value max_input_time 300
+php_value upload_max_filesize 20000000M
+php_value post_max_size 250000000000M
+php_value max_execution_time 300000
+php_value max_input_time 3000000
 
 <IfModule mod_rewrite.c>
 # Activar RewriteEngine

@@ -7,7 +7,7 @@ $id =   $_GET['id'];
 
  ?>
 
- 
+ <!-- lista de archivos -->
 <?php if (count(Operacion_archivo::lista($id))>0): ?>
  <div class="panel panel-success"  style="max-width: 60%">
  	<div class="panel-heading">
@@ -45,7 +45,7 @@ $id =   $_GET['id'];
 <?php endif ?>
 
 
-  
+<!-- lista de eventos -->  
  <?php if (count(Operacion_det::lista($id))>0): ?>
 <div class="panel panel-primary">
 <div class="panel-heading">
@@ -53,17 +53,18 @@ $id =   $_GET['id'];
 </div>
 <div class="panel-body">
 <div class="table-responsive">
-	<table class="table table-condensed">
+	<table class="table table-condensed" style="font-size: 11px;">
 		<thead>
 			<tr>
 				<th>Sistema</th>
-				<th>Tipo de Equipo</th>
+				<th>T. Equipo</th>
 				<th>Equipo</th>
 				<th>Acciones</th>
-				<th>Hora de Inicio</th>
-				<th>Fecha de Inicio</th>
-				<th>Hora de Fin</th>
-				<th>Fecha de Fin</th>
+				<th>Plan</th>
+				<th>H. Inicio</th>
+				<th>F. Inicio</th>
+				<th>H. Fin</th>
+				<th>F. Fin</th>
 				<th>Opciones</th>
 			</tr>
 		</thead>
@@ -74,13 +75,14 @@ $id =   $_GET['id'];
 		<td><?php echo $value['tipo_equipo']; ?></td>
 		<td><?php echo $value['equipo']; ?></td>
 		<td><?php echo $value['acciones']; ?></td>
+		<td><?php echo $value['plan']; ?></td>
 		<td><?php echo date_format(date_create($value['hora_inicio']),'H:i'); ?></td>
 		<td><?php echo date_format(date_create($value['fecha_inicio']),'d/m/Y'); ?></td>
 		<td><?php echo date_format(date_create($value['hora_fin']),'H:i'); ?></td>
 		<td><?php echo date_format(date_create($value['fecha_fin']),'d/m/Y'); ?></td>
 		<td>
-		<a  class="btn btn-primary btn-sm btn-edit" data-id="<?php echo $value['id']; ?>"><i class="glyphicon glyphicon-edit"></i></a>
-		<a  class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash" data-toggle="modal" data-target="#modal-eliminar-evento" data-id="<?php echo $value['id']; ?>"></i></a>
+		<a  class="btn btn-primary btn-xs btn-edit" data-id="<?php echo $value['id']; ?>"><i class="glyphicon glyphicon-edit"></i></a>
+		<a  class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash" data-toggle="modal" data-target="#modal-eliminar-evento" data-id="<?php echo $value['id']; ?>"></i></a>
 		</td>
 		</tr>
 		<?php endforeach ?>

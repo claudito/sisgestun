@@ -1,3 +1,38 @@
+<script>
+$(document).ready(function(){
+        $(".opcion").click(function(evento){
+          
+            var valor = $(this).val();
+          
+            if(valor == 'opcion2'){
+                $("#div2").css("display", "block");
+                $("#div1").css("display", "none");
+                $("#opcion1").prop('checked', false); 
+                $("#tipo").val('tipo2');
+            }else{
+                $("#div2").css("display", "none");
+                $("#div1").css("display", "block");
+                $("#opcion2").prop('checked', false); 
+                $("#tipo").val('tipo1');
+            }
+    });
+});
+</script>
+
+<script >
+$(document).ready(function() {
+// Parametros para el combo
+$("#idsistema2").change(function () {
+$("#idsistema2 option:selected").each(function () {
+elegido=$(this).val();
+$.post("../ajax/select2/tipo_equipos", { elegido: elegido }, function(data){
+$("#datatipo_equipos2").html(data);
+});     
+});
+});    
+});
+</script>
+
 <script >
 $(document).ready(function() {
 // Parametros para el combo
@@ -12,7 +47,11 @@ $("#datatipo_equipos").html(data);
 });
 </script>
 
-<form  id="agregar">
+
+<form  id="agregar" novalidate>
+
+<input type="hidden" id="tipo"  name="tipo" value="tipo1">
+
 
 <div class="modal fade" id="modal-agregar">
 <div class="modal-dialog">
@@ -28,6 +67,19 @@ $("#datatipo_equipos").html(data);
 <div class="row">
 <div class="col-md-6">
 
+<label >Metódo de Registro:</label><br>
+
+<label class="radio-inline">
+<input type="radio"  class="opcion" id="opcion1"  value="opcion1" checked > Opción N°1
+</label>
+<label class="radio-inline">
+<input type="radio"  class="opcion" id="opcion2"  value="opcion2"  > Opción N°2
+</label>
+
+<br><br>
+<div id="div1">
+<!-- Select 1-->
+
 <div class="form-group">
 <label>Sistema</label>
 <select name="sistema"  id="idsistema"  class="form-control" required>
@@ -38,9 +90,31 @@ $("#datatipo_equipos").html(data);
 </select>
 </div>
 
-
 <div id="datatipo_equipos"></div>
-	
+</div>
+        
+<div id="div2" style="display:none;">
+<!-- select 2 -->
+<div class="form-group">
+<label>Sistema</label>
+<select name="sistema2"  id="idsistema2"  class="form-control" required>
+<option value="">[Seleccionar]</option>
+<?php foreach (Sistema::lista() as $key => $value): ?>
+<option value="<?php echo $value['codigo']; ?>"><?php echo $value['nombre']; ?></option>
+<?php endforeach ?>
+</select>
+</div>
+
+
+<div id="datatipo_equipos2"></div>
+
+</div>
+
+
+
+
+
+
 
 
 

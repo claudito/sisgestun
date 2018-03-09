@@ -12,9 +12,10 @@ protected $horainicio;
 protected $horafin;
 protected $fechainicio;
 protected $fechafin;
+protected $plan;
 
 
-function __construct($operacion='',$sistema='',$tipo_equipo='',$equipo='',$acciones='',$horainicio='',$horafin='',$fechainicio='',$fechafin='')
+function __construct($operacion='',$sistema='',$tipo_equipo='',$equipo='',$acciones='',$horainicio='',$horafin='',$fechainicio='',$fechafin='',$plan='')
 {
 
  $this->operacion     = $operacion;
@@ -26,6 +27,7 @@ function __construct($operacion='',$sistema='',$tipo_equipo='',$equipo='',$accio
  $this->horafin       = $horafin;
  $this->fechainicio   = $fechainicio;
  $this->fechafin      = $fechafin;
+ $this->plan          = $plan;
 
 }
 
@@ -36,7 +38,7 @@ function agregar()
 try {
 	
 $conexion  = Conexion::get_conexion();
-$query     = "INSERT INTO operacion_detalle(codigo_operacion,sistema_codigo,tipo_equipo_codigo,equipo_codigo,acciones_codigo,hora_inicio,fecha_inicio,hora_fin,fecha_fin)VALUES(:operacion,:sistema,:tipo_equipo,:equipo,:acciones,:horainicio,:fechainicio,:horainicio,:fechafin)";
+$query     = "INSERT INTO operacion_detalle(codigo_operacion,sistema_codigo,tipo_equipo_codigo,equipo_codigo,acciones_codigo,hora_inicio,fecha_inicio,hora_fin,fecha_fin,plan_codigo)VALUES(:operacion,:sistema,:tipo_equipo,:equipo,:acciones,:horainicio,:fechainicio,:horafin,:fechafin,:plan_codigo)";
 $statement = $conexion->prepare($query);
 $statement->bindParam(':operacion',$this->operacion);
 $statement->bindParam(':sistema',$this->sistema);
@@ -45,8 +47,10 @@ $statement->bindParam(':equipo',$this->equipo);
 $statement->bindParam(':acciones',$this->acciones);
 $statement->bindParam(':horainicio',$this->horainicio);
 $statement->bindParam(':horafin',$this->horafin);
+$statement->bindParam(':horafin',$this->horafin);
 $statement->bindParam(':fechainicio',$this->fechainicio);
 $statement->bindParam(':fechafin',$this->fechafin);
+$statement->bindParam(':plan_codigo',$this->plan);
 $statement->execute();
 return "ok";
 
@@ -115,11 +119,12 @@ function lista($operacion)
 	$conexion  = Conexion::get_conexion();
 	$query     = "SELECT o.id,o.codigo_operacion,o.sistema_codigo,s.nombre sistema,o.tipo_equipo_codigo,te.nombre tipo_equipo,
 o.equipo_codigo,e.nombre equipo,o.acciones_codigo,a.nombre acciones,a.descripcion acciones_descripcion,
-o.hora_inicio,o.fecha_inicio,o.hora_fin,o.fecha_fin FROM operacion_detalle as o
-INNER JOIN sistemas as s ON o.sistema_codigo=s.codigo
-INNER JOIN tipo_equipos as te ON o.tipo_equipo_codigo=te.codigo
-INNER JOIN equipos as e ON o.equipo_codigo=e.codigo
-INNER JOIN acciones as a ON o.acciones_codigo=a.codigo
+o.hora_inicio,o.fecha_inicio,o.hora_fin,o.fecha_fin,o.plan_codigo,p.nombre plan FROM operacion_detalle as o
+LEFT JOIN sistemas as s ON o.sistema_codigo=s.codigo
+LEFT JOIN tipo_equipos as te ON o.tipo_equipo_codigo=te.codigo
+LEFT JOIN equipos as e ON o.equipo_codigo=e.codigo
+LEFT JOIN acciones as a ON o.acciones_codigo=a.codigo
+LEFT JOIN plan  as p ON o.plan_codigo=p.codigo
 WHERE codigo_operacion=:operacion  AND o.flagdelete=0 ORDER BY o.fecha_inicio";
 	$statement = $conexion->prepare($query);
 	$statement->bindParam(':operacion',$operacion);
@@ -141,11 +146,12 @@ function consulta($id,$campo)
 	$conexion  = Conexion::get_conexion();
 	$query     = "SELECT o.id,o.codigo_operacion,o.sistema_codigo,s.nombre sistema,o.tipo_equipo_codigo,te.nombre tipo_equipo,
 o.equipo_codigo,e.nombre equipo,o.acciones_codigo,a.nombre acciones,a.descripcion acciones_descripcion,
-o.hora_inicio,o.fecha_inicio,o.hora_fin,o.fecha_fin FROM operacion_detalle as o
-INNER JOIN sistemas as s ON o.sistema_codigo=s.codigo
-INNER JOIN tipo_equipos as te ON o.tipo_equipo_codigo=te.codigo
-INNER JOIN equipos as e ON o.equipo_codigo=e.codigo
-INNER JOIN acciones as a ON o.acciones_codigo=a.codigo
+o.hora_inicio,o.fecha_inicio,o.hora_fin,o.fecha_fin,o.plan_codigo,p.nombre plan FROM operacion_detalle as o
+LEFT JOIN sistemas as s ON o.sistema_codigo=s.codigo
+LEFT JOIN tipo_equipos as te ON o.tipo_equipo_codigo=te.codigo
+LEFT JOIN equipos as e ON o.equipo_codigo=e.codigo
+LEFT JOIN acciones as a ON o.acciones_codigo=a.codigo
+LEFT JOIN plan  as p ON o.plan_codigo=p.codigo
 WHERE o.id=:id AND o.flagdelete=0";
 	$statement = $conexion->prepare($query);
 	$statement->bindParam(':id',$id);

@@ -102,7 +102,7 @@ $codigo  = $_GET['codigo'];
 
 <div class="form-group">
 <label>Operador 2</label>
-<select name="operador2"  class="form-control"  required="">
+<select name="operador2"  class="form-control">
 <option value="<?php echo Operacion::consulta($codigo,'codigo_operador2'); ?>"><?php echo Operacion::consulta($codigo,'operador2'); ?></option>
 <?php $operador2 = Operacion::consulta($codigo,'codigo_operador2'); ?>
 <?php foreach (Personal::lista_cargo('CODCAR003') as $key => $value): ?>
@@ -115,7 +115,7 @@ $codigo  = $_GET['codigo'];
 
 <div class="form-group">
 <label>TI</label>
-<select name="ti"  class="form-control"  required="">
+<select name="ti"  class="form-control" >
 <option value="<?php echo Operacion::consulta($codigo,'codigo_ti'); ?>"><?php echo Operacion::consulta($codigo,'ti');  ?></option>
 <?php $ti = Operacion::consulta($codigo,'codigo_ti'); ?>
 <?php foreach (Personal::lista_cargo('CODCAR004') as $key => $value): ?>

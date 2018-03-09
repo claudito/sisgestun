@@ -33,6 +33,11 @@ $id =  $_GET['id'];
 <input type="text"  class="form-control" 
  value="<?php  echo Operacion_det::consulta($id,'acciones');?>" readonly>
 </div>
+<div class="form-group">
+<label>Plan</label>
+<input type="text"  class="form-control" 
+ value="<?php  echo Operacion_det::consulta($id,'plan');?>" readonly>
+</div>
 </div>
 <div class="col-md-6">
 <div class="form-group">

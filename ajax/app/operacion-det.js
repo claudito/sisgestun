@@ -54,6 +54,26 @@ $('#modal-eliminar-evento').on('show.bs.modal', function (event) {
       modal.find('#id').val(id)
     })
 
+$( "#archivo" ).submit(function( event ) {
+    var parametros = $(this).serialize();
+    var  id        = $("#id").val();
+       $.ajax({
+          type: "POST",
+          url: "../controlador/"+carpeta+"/archivo.php",
+          data: parametros,
+           beforeSend: function(objeto){
+            $("#mensaje").html("Mensaje: Cargando...");
+            },
+          success: function(datos){
+          $("#mensaje").html(datos);
+          $('#modal-archivo').modal('hide');
+          loadTable(id);
+          }
+      });
+      event.preventDefault();
+    });
+
+
 
 $( "#eliminar-archivo" ).submit(function( event ) {
     var parametros = $(this).serialize();

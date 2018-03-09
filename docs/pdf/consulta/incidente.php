@@ -21,32 +21,32 @@
 <td class="cabecera-th"><?php echo Operacion::consulta($codigo,'coordinador'); ?></td>
 </tr>
 <tr >
-<td class="cabecera-th"><strong>Fecha Inicio:</strong></td>
-<td class="cabecera-th">07/02/2018 &nbsp; <strong>H.Inicio:</strong>21:48</td>
+<td class="cabecera-th">SENTIDO:</td>
+<td class="cabecera-th"><?php echo Operacion::consulta($codigo,'sentido'); ?></td>
 <td class="cabecera-th">OPERADOR1:</td>
 <td class="cabecera-th"><?php echo Operacion::consulta($codigo,'operador1'); ?></td>
 </tr>
 <tr >
-<td class="cabecera-th"><strong>Fecha Fin:</strong></td>
-<td class="cabecera-th">07/02/2018 &nbsp; <strong>H.Fin&nbsp;&nbsp;&nbsp;&nbsp;:</strong>21:48</td>
+<td class="cabecera-th">TURNO:</td>
+<td class="cabecera-th"><?php echo Operacion::consulta($codigo,'turno'); ?></td>
 <td class="cabecera-th">OPERADOR2:</td>
 <td class="cabecera-th"><?php echo Operacion::consulta($codigo,'operador2'); ?></td>
 </tr>
 <tr >
-<td class="cabecera-th">SENTIDO:</td>
-<td class="cabecera-th"><?php echo Operacion::consulta($codigo,'sentido'); ?></td>
+<td class="cabecera-th">INCIDENTE:</td>
+<td class="cabecera-th"><?php echo Operacion::consulta($codigo,'valor_incidente').' '.Operacion::consulta($codigo,'descripcion_incidente'); ?></td>
 <td class="cabecera-th">TI:</td>
 <td class="cabecera-th"><?php echo Operacion::consulta($codigo,'ti'); ?></td>
 </tr>
 <tr>
-<td class="cabecera-th">TURNO:</td>
-<td class="cabecera-th"><?php echo Operacion::consulta($codigo,'turno'); ?></td>
+<td class="cabcera-th"></td>
+<td class="cabcera-th"></td>
 <td class="cabecera-th">EPI:</td>
 <td class="cabecera-th"><?php echo Operacion::consulta($codigo,'epi'); ?></td>
 </tr>
 <tr>
-<td class="cabecera-th">INCIDENTE:</td>
-<td class="cabecera-th"><?php echo Operacion::consulta($codigo,'valor_incidente').' '.Operacion::consulta($codigo,'descripcion_incidente'); ?></td>
+<td class="cabcera-th"></td>
+<td class="cabcera-th"></td>
 <td class="cabecera-th">SEGURIDAD:</td>
 <td class="cabecera-th"><?php echo Operacion::consulta($codigo,'seguridad'); ?></td>
 </tr>
